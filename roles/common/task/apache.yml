@@ -1,0 +1,4 @@
+---
+ - name: be sure apache2 it's running
+   service: name=apache2 stated=started enabled=yes
+   tags: apache
