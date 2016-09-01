@@ -1,0 +1,25 @@
+---
+ - name: Install apache2
+   apt: name=apache2 state=latest update_cache=yes
+ - name: Write apache config file
+   template: src=/srv/httpd.j2 dest=/etc/httpd.conf 
+   notify:
+   - restart apache
+
+ - name:Install php5
+   apt: name={{ item }} state=latest update_cache=yes
+   with_items:
+   - php5
+   - php5-pecl-apcu 
+   - php5-cli 
+   - php5-pear 
+   - php5-pdo
+   - php5-mysqlnd 
+   - php5-pecl-memcache
+   - php5-pecl-memcached
+   - php5-gd php-mbstring
+   - php5-mcrypt
+   - php5-xml
+   - php5-curl
+   notify:
+   - restart apache
